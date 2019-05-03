@@ -356,7 +356,7 @@ export function createMetadataJSON(server: typeof ODataServer) {
         };
     };
     propNames.forEach((i) => {
-        if (i != "$metadata" && server.prototype[i]) {
+        if (i != "$metadata" && server.prototype.hasOwnProperty(i)){
             if (server.prototype[i].prototype instanceof ODataController) {
                 let ctrl = server.prototype[i];
                 if (!ctrl.namespace) ctrl.namespace = server.namespace;
@@ -438,7 +438,7 @@ export function createMetadataJSON(server: typeof ODataServer) {
     });
 
     propNames.forEach((i) => {
-        if (i != "$metadata" && server.prototype[i]) {
+        if (i != "$metadata" && server.prototype.hasOwnProperty(i)){
             let operationNamespace = server.prototype[i].namespace || server.namespace;
             let operationSchema = definition.dataServices.schema.filter((schema) => schema.namespace == operationNamespace)[0];
             if (!operationSchema) {
